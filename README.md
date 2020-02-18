@@ -1,6 +1,6 @@
 # Zero Allocation JSON Logger
 
-[![godoc](http://img.shields.io/badge/godoc-reference-blue.svg?style=flat)](https://godoc.org/github.com/rs/zerolog) [![license](http://img.shields.io/badge/license-MIT-red.svg?style=flat)](https://raw.githubusercontent.com/rs/zerolog/master/LICENSE) [![Build Status](https://travis-ci.org/rs/zerolog.svg?branch=master)](https://travis-ci.org/rs/zerolog) [![Coverage](http://gocover.io/_badge/github.com/rs/zerolog)](http://gocover.io/github.com/rs/zerolog)
+[![godoc](http://img.shields.io/badge/godoc-reference-blue.svg?style=flat)](https://godoc.org/github.com/ptechen/zerolog) [![license](http://img.shields.io/badge/license-MIT-red.svg?style=flat)](https://raw.githubusercontent.com/rs/zerolog/master/LICENSE) [![Build Status](https://travis-ci.org/rs/zerolog.svg?branch=master)](https://travis-ci.org/rs/zerolog) [![Coverage](http://gocover.io/_badge/github.com/ptechen/zerolog)](http://gocover.io/github.com/ptechen/zerolog)
 
 The zerolog package provides a fast and simple logger dedicated to JSON output.
 
@@ -14,7 +14,7 @@ To keep the code base and the API simple, zerolog focuses on efficient structure
 
 ## Who uses zerolog
 
-Find out [who uses zerolog](https://github.com/rs/zerolog/wiki/Who-uses-zerolog) and add your company / project to the list.
+Find out [who uses zerolog](https://github.com/ptechen/zerolog/wiki/Who-uses-zerolog) and add your company / project to the list.
 
 ## Features
 
@@ -32,21 +32,21 @@ Find out [who uses zerolog](https://github.com/rs/zerolog/wiki/Who-uses-zerolog)
 ## Installation
 
 ```bash
-go get -u github.com/rs/zerolog/log
+go get -u github.com/ptechen/zerolog/log
 ```
 
 ## Getting Started
 
 ### Simple Logging Example
 
-For simple logging, import the global logger package **github.com/rs/zerolog/log**
+For simple logging, import the global logger package **github.com/ptechen/zerolog/log**
 
 ```go
 package main
 
 import (
-    "github.com/rs/zerolog"
-    "github.com/rs/zerolog/log"
+    "github.com/ptechen/zerolog"
+    "github.com/ptechen/zerolog/log"
 )
 
 func main() {
@@ -71,8 +71,8 @@ func main() {
 package main
 
 import (
-    "github.com/rs/zerolog"
-    "github.com/rs/zerolog/log"
+    "github.com/ptechen/zerolog"
+    "github.com/ptechen/zerolog/log"
 )
 
 func main() {
@@ -102,8 +102,8 @@ func main() {
 package main
 
 import (
-    "github.com/rs/zerolog"
-    "github.com/rs/zerolog/log"
+    "github.com/ptechen/zerolog"
+    "github.com/ptechen/zerolog/log"
 )
 
 func main() {
@@ -139,8 +139,8 @@ package main
 import (
     "flag"
 
-    "github.com/rs/zerolog"
-    "github.com/rs/zerolog/log"
+    "github.com/ptechen/zerolog"
+    "github.com/ptechen/zerolog/log"
 )
 
 func main() {
@@ -190,8 +190,8 @@ You may choose to log without a specific level by using the `Log` method. You ma
 package main
 
 import (
-    "github.com/rs/zerolog"
-    "github.com/rs/zerolog/log"
+    "github.com/ptechen/zerolog"
+    "github.com/ptechen/zerolog/log"
 )
 
 func main() {
@@ -213,8 +213,8 @@ package main
 import (
     "errors"
 
-    "github.com/rs/zerolog"
-    "github.com/rs/zerolog/log"
+    "github.com/ptechen/zerolog"
+    "github.com/ptechen/zerolog/log"
 )
 
 func main() {
@@ -418,7 +418,7 @@ stdlog.Print("hello world")
 
 ### Integration with `net/http`
 
-The `github.com/rs/zerolog/hlog` package provides some helpers to integrate zerolog with `http.Handler`.
+The `github.com/ptechen/zerolog/hlog` package provides some helpers to integrate zerolog with `http.Handler`.
 
 In this example we use [alice](https://github.com/justinas/alice) to install logger for better readability.
 

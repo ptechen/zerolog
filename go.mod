@@ -1,4 +1,4 @@
-module github.com/rs/zerolog
+module github.com/ptechen/zerolog
 
 require (
 	github.com/coreos/go-systemd v0.0.0-20190321100706-95778dfbb74e
@@ -7,3 +7,5 @@ require (
 	github.com/zenazn/goji v0.9.0
 	golang.org/x/tools v0.0.0-20190828213141-aed303cbaa74
 )
+
+go 1.13

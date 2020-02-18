@@ -8,7 +8,7 @@ import (
 	"sync"
 	"time"
 
-	"github.com/rs/zerolog/diode/internal/diodes"
+	"github.com/ptechen/zerolog/diode/internal/diodes"
 )
 
 var bufPool = &sync.Pool{
@@ -48,10 +48,10 @@ type Writer struct {
 // used.
 //
 // See code.cloudfoundry.org/go-diodes for more info on diode.
-func NewWriter(w io.Writer, size int, poolInterval time.Duration, f Alerter) Writer {
+func NewWriter(w *io.Writer, size int, poolInterval time.Duration, f Alerter) Writer {
 	ctx, cancel := context.WithCancel(context.Background())
 	dw := Writer{
-		w:    w,
+		w:    *w,
 		c:    cancel,
 		done: make(chan struct{}),
 	}
@@ -99,7 +99,6 @@ func (dw Writer) poll() {
 		}
 		p := *(*[]byte)(d)
 		dw.w.Write(p)
-
 		// Proper usage of a sync.Pool requires each entry to have approximately
 		// the same memory cost. To obtain this property when the stored type
 		// contains a variably-sized buffer, we add a hard limit on the maximum buffer
