@@ -90,8 +90,6 @@ var (
 	// MonitoringFrequency is the frequency of monitoring log file changes.
 	MonitoringFrequency = time.Second * 3
 
-	// GlobalsLogger is used for global log printing.
-	GlobalsLogger *Logger
 )
 
 var (
