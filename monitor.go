@@ -24,6 +24,7 @@ import (
 
 // Monitor is a method for monitoring log files.
 func Monitor(output func()) {
+	GlobalsLogger.Info().Msg("Monitor log file")
 	// Create a monitoring object.
 	watch, err := fsnotify.NewWatcher()
 	if err != nil {
@@ -42,6 +43,7 @@ func Monitor(output func()) {
 		for {
 			select {
 			case <- ticker.C:
+				GlobalsLogger.Info().Msg("check file size")
 				if fileSize(LogFilePath) > LogFileSize {
 					watch.Events <- fsnotify.Event{
 						Name:LogFilePath,
@@ -54,7 +56,6 @@ func Monitor(output func()) {
 					// Create a file
 					if ev.Op&fsnotify.Create == fsnotify.Create {
 						GlobalsLogger.Info().Msgf("Create a file: %s", ev.Name)
-
 						// Redirect the output destination of the log file.
 						output()
 					}
