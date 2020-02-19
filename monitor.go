@@ -37,7 +37,7 @@ func output(newLogFileName string) {
 }
 
 // Monitor is a method for monitoring log files.
-func Monitor(output func(newLogFileName string)) {
+func Monitor() {
 	GlobalsLogger.Info().Msg("Monitor log file")
 	// Create a monitoring object.
 	watch, err := fsnotify.NewWatcher()
