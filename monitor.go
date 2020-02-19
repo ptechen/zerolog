@@ -36,6 +36,7 @@ func output(newLogFileName string, logger *Logger) {
 	}
 }
 
+
 // Monitor is a method for monitoring log files.
 func Monitor(logger *Logger) {
 	logger.Info().Msg("Monitor log file")
