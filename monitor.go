@@ -3,27 +3,41 @@ package zerolog
 import (
 	"fmt"
 	"github.com/fsnotify/fsnotify"
+	"github.com/ptechen/zerolog/diode"
 	"log"
 	"os"
 	"time"
 )
+var newLogFileName string
+var curLogZFileName string
 
 // output Example
-//func output() {
-//	if LogFilePath != ""{
-//		f, err := os.OpenFile(LogFilePath, os.O_RDWR|os.O_APPEND|os.O_CREATE, 0666)
-//		if err != nil {
-//			panic("create log file failed")
-//		}
-//		w := diode.NewWriter(f, 10000, 10*time.Millisecond, func(missed int) {
-//			GlobalsLogger.Warn().Msgf("Logger Dropped %d messages", missed)
-//		})
-//		*GlobalsLogger = (GlobalsLogger.Output(w))
-//	}
-//}
+func output(newLogFileName string) {
+	if newLogFileName != "" {
+		f, err := os.OpenFile(newLogFileName, os.O_RDWR|os.O_APPEND|os.O_CREATE, 0666)
+		if err != nil {
+			panic("create log file failed")
+		}
+		w := diode.NewWriter(f, 10000, 10*time.Millisecond, func(missed int) {
+			GlobalsLogger.Warn().Msgf("Logger Dropped %d messages", missed)
+		})
+		*GlobalsLogger = GlobalsLogger.Output(w)
+		newLogFileName = ""
+
+	} else if LogFilePath != ""{
+		f, err := os.OpenFile(LogFilePath, os.O_RDWR|os.O_APPEND|os.O_CREATE, 0666)
+		if err != nil {
+			panic("create log file failed")
+		}
+		w := diode.NewWriter(f, 10000, 10*time.Millisecond, func(missed int) {
+			GlobalsLogger.Warn().Msgf("Logger Dropped %d messages", missed)
+		})
+		*GlobalsLogger = GlobalsLogger.Output(w)
+	}
+}
 
 // Monitor is a method for monitoring log files.
-func Monitor(output func()) {
+func Monitor(output func(newLogFileName string)) {
 	GlobalsLogger.Info().Msg("Monitor log file")
 	// Create a monitoring object.
 	watch, err := fsnotify.NewWatcher()
@@ -57,7 +71,7 @@ func Monitor(output func()) {
 					if ev.Op&fsnotify.Create == fsnotify.Create {
 						GlobalsLogger.Info().Msgf("Create a file: %s", ev.Name)
 						// Redirect the output destination of the log file.
-						output()
+						//output()
 					}
 
 					// Write to file
@@ -72,6 +86,10 @@ func Monitor(output func()) {
 
 					// Rename file
 					if ev.Op&fsnotify.Rename == fsnotify.Rename {
+						now := time.Now()
+						newLogFileName = fmt.Sprintf("%s-%d-%d-%d-%d-%d",
+							LogFilePath, now.Year(), now.Month(), now.Day(), now.Hour(), now.Minute())
+						output(newLogFileName)
 						GlobalsLogger.Info().Msgf("Rename file: %s", ev.Name)
 						rename2File()
 						watch.Events <- fsnotify.Event {
@@ -104,7 +122,5 @@ func fileSize(file string) int64 {
 }
 
 func rename2File() {
-	now := time.Now()
-	_ = os.Rename(LogFilePath, fmt.Sprintf("%s-%d-%d-%d-%d-%d",
-		LogFilePath, now.Year(), now.Month(), now.Day(), now.Hour(), now.Minute()))
+	_ = os.Rename(LogFilePath, newLogFileName)
 }
