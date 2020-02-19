@@ -4,12 +4,10 @@ import (
 	"fmt"
 	"github.com/fsnotify/fsnotify"
 	"github.com/ptechen/zerolog/diode"
-	"log"
 	"os"
 	"time"
 )
 var newLogFileName string
-var curLogZFileName string
 
 // output Example
 func output(newLogFileName string, logger *Logger) {
