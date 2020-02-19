@@ -80,6 +80,18 @@ var (
 	// output. If not set, an error is printed on the stderr. This handler must
 	// be thread safe and non-blocking.
 	ErrorHandler func(err error)
+
+	// LogFileSize is the size of the log file.
+	LogFileSize int64 = 1024 * 1024
+
+	// LogFilePath is the path to the log file.
+	LogFilePath = "/opt/log/log.log"
+
+	// MonitoringFrequency is the frequency of monitoring log file changes.
+	MonitoringFrequency = time.Second * 3
+
+	// GlobalsLogger is used for global log printing.
+	GlobalsLogger *Logger
 )
 
 var (

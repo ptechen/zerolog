@@ -48,10 +48,10 @@ type Writer struct {
 // used.
 //
 // See code.cloudfoundry.org/go-diodes for more info on diode.
-func NewWriter(w *io.Writer, size int, poolInterval time.Duration, f Alerter) Writer {
+func NewWriter(w io.Writer, size int, poolInterval time.Duration, f Alerter) Writer {
 	ctx, cancel := context.WithCancel(context.Background())
 	dw := Writer{
-		w:    *w,
+		w:    w,
 		c:    cancel,
 		done: make(chan struct{}),
 	}
