@@ -50,9 +50,9 @@ func Monitor(logger *Logger) {
 	if err != nil {
 		logger.Fatal().Err(err).Send()
 	}
-	ticker := time.NewTicker(MonitoringFrequency)
 
 	go func() {
+		ticker := time.NewTicker(MonitoringFrequency)
 		for {
 			select {
 			case <- ticker.C:
